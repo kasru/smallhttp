@@ -1,0 +1,39 @@
+# Project: smallhttp
+# Makefile created by Dev-C++ 4.9.9.2
+
+CPP  = g++.exe
+CC   = gcc.exe
+WINDRES = windres.exe
+RES  = 
+OBJ  = httpcodes.o main.o myhttp.o mysocket.o $(RES)
+LINKOBJ  = httpcodes.o main.o myhttp.o mysocket.o $(RES)
+LIBS =  -L"C:/Dev-Cpp/lib" -lws2_32 -lpthreadGC2  
+INCS =  -I"C:/Dev-Cpp/include" 
+CXXINCS =  -I"."  -I"C:/Dev-Cpp/lib/gcc/mingw32/3.4.2/include"  -I"C:/Dev-Cpp/include/c++/3.4.2/backward"  -I"C:/Dev-Cpp/include/c++/3.4.2/mingw32"  -I"C:/Dev-Cpp/include/c++/3.4.2"  -I"C:/Dev-Cpp/include" 
+BIN  = smallhttp.exe
+CXXFLAGS = $(CXXINCS)   -D_WIN32 -g
+CFLAGS = $(INCS)   -D_WIN32 -g
+RM = rm -f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before smallhttp.exe all-after
+
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CPP) $(LINKOBJ) -o "smallhttp.exe" $(LIBS)
+
+httpcodes.o: httpcodes.cpp
+	$(CPP) -c httpcodes.cpp -o httpcodes.o $(CXXFLAGS)
+
+main.o: main.cpp
+	$(CPP) -c main.cpp -o main.o $(CXXFLAGS)
+
+myhttp.o: myhttp.cpp
+	$(CPP) -c myhttp.cpp -o myhttp.o $(CXXFLAGS)
+
+mysocket.o: mysocket.cpp
+	$(CPP) -c mysocket.cpp -o mysocket.o $(CXXFLAGS)

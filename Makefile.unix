@@ -1,0 +1,35 @@
+CPP  = g++
+CC   = gcc
+RES  = 
+OBJ  = httpcodes.o main.o myhttp.o mysocket.o $(RES)
+LINKOBJ  = httpcodes.o main.o myhttp.o mysocket.o $(RES)
+LIBS =  -lpthread
+INCS =  -I"." 
+CXXINCS =  -I"."
+BIN  = smallhttp
+CXXFLAGS = $(CXXINCS)   -DUNIX -g
+CFLAGS = $(INCS)   -DUNIX -g
+RM = rm -f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before smallhttp all-after
+
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CPP) $(LINKOBJ) -o smallhttp $(LIBS)
+
+httpcodes.o: httpcodes.cpp
+	$(CPP) -c httpcodes.cpp -o httpcodes.o $(CXXFLAGS)
+
+main.o: main.cpp
+	$(CPP) -c main.cpp -o main.o $(CXXFLAGS)
+
+myhttp.o: myhttp.cpp
+	$(CPP) -c myhttp.cpp -o myhttp.o $(CXXFLAGS)
+
+mysocket.o: mysocket.cpp
+	$(CPP) -c mysocket.cpp -o mysocket.o $(CXXFLAGS)
